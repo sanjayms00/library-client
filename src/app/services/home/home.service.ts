@@ -10,7 +10,13 @@ import { Book } from '../../interfaces/book.interface';
 export class HomeService {
   constructor(private readonly http: HttpClient) {}
 
+  //get books on page load
   homeLoad(pgNo = 0): Observable<Book[]> {
     return this.http.get<Book[]>(`${constant.baseUrl}book?pgNo=${pgNo}`);
+  }
+
+  //search book
+  search(word: string): Observable<Book[]> {
+    return this.http.get<Book[]>(`${constant.baseUrl}filter?word=${word}`);
   }
 }

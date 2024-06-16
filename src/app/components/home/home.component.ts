@@ -3,6 +3,7 @@ import { HomeService } from '../../services/home/home.service';
 import { Book } from '../../interfaces/book.interface';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-home',
@@ -24,5 +25,15 @@ export class HomeComponent implements OnInit {
 
   getCardEventId(id: string) {
     this.router.navigate(['book', id]);
+  }
+
+  search(formData: NgForm) {
+    const { search } = formData.value;
+
+    this.book = this.homeService.search(search);
+  }
+
+  getFilterEvent(event: Observable<Book[]>) {
+    this.book = event;
   }
 }

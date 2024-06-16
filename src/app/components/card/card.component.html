@@ -1,4 +1,4 @@
-<div class="grid grid-cols-4 gap-4">
+<div class="grid grid-cols-4 gap-4 py-4">
   @for (book of bookData | async; track $index) {
   <!--     
     @if (!book) {
@@ -10,7 +10,7 @@
   >
     <a (click)="detail(book._id)" class="cursor-pointer">
       <h5
-        class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white"
+        class="mb-2 text-xl font-semibold tracking-tight text-gray-900 dark:text-white"
       >
         {{ book.title | titlecase }}
       </h5>

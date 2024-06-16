@@ -1,4 +1,8 @@
-<form class="max-w-md mx-auto">
+<form
+  class="max-w-md mx-auto"
+  #searchForm="ngForm"
+  (ngSubmit)="search(searchForm)"
+>
   <label
     for="default-search"
     class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white"
@@ -26,10 +30,12 @@
     </div>
     <input
       type="search"
+      name="search"
       id="default-search"
       class="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
       placeholder="Search Mockups, Logos..."
       required
+      ngModel
     />
     <button
       type="submit"
@@ -40,9 +46,27 @@
   </div>
 </form>
 
-<app-card
-  [bookData]="book"
-  (cardEvent)="getCardEventId($event)"
-  class="p-5"
-></app-card>
-<app-pagination class="p-5"></app-pagination>
+<div class="grid grid-cols-5 gap-4">
+  <div class="">
+    <h3 class="text-xl pb-3 font-bold">Filter</h3>
+    <app-accordion (filterEvent)="getFilterEvent($event)"></app-accordion>
+  </div>
+  <div class="col-span-4">
+    <ng-container *ngIf="(book | async)?.length; else noContent">
+      <app-card
+        [bookData]="book"
+        (cardEvent)="getCardEventId($event)"
+        class="p-5"
+      ></app-card>
+      <app-pagination class="p-5"></app-pagination>
+    </ng-container>
+    <ng-template #noContent>
+      <img
+        src="/assets/empty.jpg"
+        alt="empty illustration"
+        class="w-1/4 m-auto"
+      />
+      <p class="text-center py-4">Nothing to show</p>
+    </ng-template>
+  </div>
+</div>
