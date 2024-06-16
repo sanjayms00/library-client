@@ -29,8 +29,8 @@ export class HomeComponent implements OnInit {
 
   search(formData: NgForm) {
     const { search } = formData.value;
-
     this.book = this.homeService.search(search);
+    // formData.reset();
   }
 
   getFilterEvent(event: Observable<Book[]>) {

@@ -1,0 +1,87 @@
+<div class="flex justify-center">
+  <button
+    type="button"
+    (click)="showModal(true, 'create' + action, null)"
+    class="text-white bg-green-500 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center me-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
+  >
+    <svg
+      class="w-6 h-6 text-white-800 dark:text-white"
+      aria-hidden="true"
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      fill="none"
+      viewBox="0 0 24 24"
+    >
+      <path
+        stroke="currentColor"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+        d="M5 12h14m-7 7V5"
+      />
+    </svg>
+
+    <span class="sr-only">Icon description</span>
+  </button>
+</div>
+<div class="relative overflow-x-auto shadow-md sm:rounded-lg pt-2">
+  <table
+    class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400"
+  >
+    <thead
+      class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400"
+    >
+      <tr>
+        @for (item of fields; track $index) {
+        <th scope="col" class="px-6 py-3">{{ item }}</th>
+        }
+      </tr>
+    </thead>
+    <tbody>
+      @for (item of listData; track $index) {
+      <tr>
+        <th
+          scope="row"
+          class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+        >
+          {{ item?.title || item?.name | titlecase }}
+        </th>
+        <td class="px-6 py-4">
+          {{ item?.description || item?.biography | slice : 0 : 50 }}
+        </td>
+        <td class="px-6 py-4">
+          {{ item?.publishedDate || item?.birthdate | date : "dd/MM/yy" }}
+        </td>
+        @if (item?.authorData?.name) {
+        <td class="px-6 py-4">
+          {{ item?.authorData?.name }}
+        </td>
+        }
+
+        <td class="px-6 py-4 flex gap-2">
+          <button
+            (click)="showModal(true, 'edit' + action, item)"
+            class="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+            type="button"
+          >
+            Edit
+          </button>
+          <button
+            class="block text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800"
+            type="button"
+          >
+            Delete
+          </button>
+        </td>
+      </tr>
+      }
+    </tbody>
+  </table>
+</div>
+
+<app-modal
+  [isVisible]="modalVisible"
+  [actionType]="modalActionType"
+  (modalEvent)="getModalEvent($event)"
+></app-modal>
