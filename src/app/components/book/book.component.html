@@ -1,0 +1,40 @@
+<div class="min-h-screen">
+  <div class="p-6">
+    <div class="flex justify-between">
+      <h2 class="text-3xl font-bold text-gray-800 w-1/2">
+        {{ bookData.title | titlecase }}
+      </h2>
+      <button
+        class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600"
+        routerLink="/home"
+      >
+        Back
+      </button>
+    </div>
+    <p class="text-gray-600 mt-4">
+      {{ bookData.description }}
+    </p>
+    <p class="text-gray-600 my-4">
+      Published date: {{ bookData.publishedDate | date : "dd/MM/yy" }}
+    </p>
+
+    <hr class="py-2" />
+    @if (bookData.authorData) {
+    <h2 class="text-xl pb-4 font-semibold text-gray-800 w-1/2">
+      Author Details
+    </h2>
+    <div class="pl-5">
+      <h2 class="text-md font-semibold text-gray-800">
+        {{ bookData.authorData.name | titlecase }}
+        <span class="font-light px-2"
+          >DOB: {{ bookData.authorData.birthdate | date : "dd/MM/yy" }}</span
+        >
+      </h2>
+      <p class="text-gray-600 mt-2">
+        {{ bookData.authorData.biography }}
+      </p>
+      <p class="text-gray-600 mt-2"></p>
+    </div>
+    }
+  </div>
+</div>
