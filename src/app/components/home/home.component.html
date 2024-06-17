@@ -52,13 +52,20 @@
     <app-accordion (filterEvent)="getFilterEvent($event)"></app-accordion>
   </div>
   <div class="col-span-4">
-    <ng-container *ngIf="(book | async)?.length; else noContent">
+    <ng-container *ngIf="(book | async)?.allBooks?.length; else noContent">
       <app-card
         [bookData]="book"
         (cardEvent)="getCardEventId($event)"
         class="p-5"
       ></app-card>
-      <app-pagination class="p-5"></app-pagination>
+
+      <app-pagination
+        class="p-5"
+        [pageNo]="pageNo"
+        [count]="count"
+        [total]="(book | async)!.total"
+        (paginationEvent)="getPaginationEvent($event)"
+      ></app-pagination>
     </ng-container>
     <ng-template #noContent>
       <img

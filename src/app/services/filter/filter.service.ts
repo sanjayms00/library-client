@@ -17,7 +17,7 @@ export class FilterService {
   }
 
   //filter book
-  filter(filter: Filter): Observable<Book[]> {
+  filter(filter: Filter): Observable<{ allBooks: Book[]; total: number }> {
     let params = new HttpParams();
     // Append each filter property to the params
     Object.entries(filter).forEach(([key, value]) => {
@@ -26,6 +26,9 @@ export class FilterService {
       }
     });
 
-    return this.http.get<Book[]>(`${constant.baseUrl}filter`, { params });
+    return this.http.get<{ allBooks: Book[]; total: number }>(
+      `${constant.baseUrl}filter`,
+      { params }
+    );
   }
 }

@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
   styleUrl: './card.component.css',
 })
 export class CardComponent {
-  @Input() bookData!: Observable<Book[]>;
+  @Input() bookData!: Observable<{ allBooks: Book[]; total: number }>;
   @Output() cardEvent = new EventEmitter();
 
   detail(id: string) {

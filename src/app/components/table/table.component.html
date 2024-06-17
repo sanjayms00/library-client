@@ -33,6 +33,7 @@
       class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400"
     >
       <tr>
+        <th scope="col" class="px-6 py-3">no.</th>
         @for (item of fields; track $index) {
         <th scope="col" class="px-6 py-3">{{ item }}</th>
         }
@@ -43,7 +44,13 @@
       <tr>
         <th
           scope="row"
-          class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+          class="px-6 py-4 font-semibold text-gray-900 whitespace-nowrap dark:text-white"
+        >
+          {{ page * count + $index + 1 }}
+        </th>
+        <th
+          scope="row"
+          class="px-6 py-4 font-bold text-gray-900 whitespace-nowrap dark:text-white"
         >
           {{ item?.title || item?.name | titlecase }}
         </th>
@@ -68,6 +75,7 @@
             Edit
           </button>
           <button
+            (click)="deleteData(action, item._id)"
             class="block text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800"
             type="button"
           >
@@ -80,8 +88,4 @@
   </table>
 </div>
 
-<app-modal
-  [isVisible]="modalVisible"
-  [actionType]="modalActionType"
-  (modalEvent)="getModalEvent($event)"
-></app-modal>
+<app-modal [actionType]="modalActionType"></app-modal>

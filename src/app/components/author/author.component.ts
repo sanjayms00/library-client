@@ -9,17 +9,34 @@ import { Subscription } from 'rxjs';
   styleUrl: './author.component.css',
 })
 export class AuthorComponent implements OnInit, OnDestroy {
-  authorList: AuthorData[] = [];
+  pageNo = 0;
+  count: number = 12;
+  total!: number;
+  authorList!: AuthorData[];
   fields = ['Name', 'biography', 'birthdate', 'Action'];
   getAuthorsSubscription!: Subscription;
 
   constructor(private readonly authorService: AuthorService) {}
 
   ngOnInit(): void {
-    this.getAuthorsSubscription = this.authorService.getAuthors().subscribe({
-      next: (res) => (this.authorList = res),
-      error: (err) => console.log(err),
-    });
+    this.getAuthor(this.pageNo);
+  }
+
+  getAuthor(page: number) {
+    this.getAuthorsSubscription = this.authorService
+      .getAuthors(page)
+      .subscribe({
+        next: (res) => {
+          this.authorList = res.author;
+          this.total = res.total;
+        },
+        error: (err) => console.log(err),
+      });
+  }
+
+  getPaginationEvent(event: number) {
+    this.getAuthor(event);
+    this.pageNo = event;
   }
 
   ngOnDestroy(): void {

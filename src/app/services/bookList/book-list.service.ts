@@ -11,7 +11,9 @@ export class BookListService {
   constructor(private readonly http: HttpClient) {}
 
   //get Book list
-  getBook(pgNo = 0): Observable<Book[]> {
-    return this.http.get<Book[]>(`${constant.baseUrl}book?pgNo=${pgNo}`);
+  getBook(pgNo = 0): Observable<{ allBooks: Book[]; total: number }> {
+    return this.http.get<{ allBooks: Book[]; total: number }>(
+      `${constant.baseUrl}book?pgNo=${pgNo}`
+    );
   }
 }

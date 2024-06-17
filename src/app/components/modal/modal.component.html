@@ -1,5 +1,5 @@
 <div
-  *ngIf="isVisible"
+  *ngIf="modalVisible"
   class="fixed top-0 right-0 left-0 bottom-0 flex justify-center items-center bg-gray-800 bg-opacity-50"
 >
   <div class="relative bg-white rounded-lg shadow-md dark:bg-gray-700">
@@ -37,12 +37,16 @@
       <ng-container
         *ngIf="actionType === 'createBook' || actionType === 'editBook'"
       >
-        <app-book-form></app-book-form>
+        <app-book-form
+          [isEditMode]="actionType === 'createBook' ? false : true"
+        ></app-book-form>
       </ng-container>
       <ng-container
         *ngIf="actionType === 'createAuthor' || actionType === 'editAuthor'"
       >
-        <app-author-form></app-author-form>
+        <app-author-form
+          [isEditMode]="actionType === 'createAuthor' ? false : true"
+        ></app-author-form>
       </ng-container>
     </div>
   </div>

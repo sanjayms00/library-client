@@ -13,3 +13,15 @@ export interface AuthorData {
   biography: string;
   birthdate: Date;
 }
+
+export interface CreateAuthor {
+  name: string;
+  biography: string;
+  birthdate: Date;
+}
+
+export interface CreateBook {
+  name: string;
+  biography: string;
+  birthdate: Date;
+}

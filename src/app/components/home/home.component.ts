@@ -12,7 +12,9 @@ import { NgForm } from '@angular/forms';
 })
 export class HomeComponent implements OnInit {
   pageNo = 0;
-  book!: Observable<Book[]>;
+  count: number = 12;
+  total: number = 0;
+  book!: Observable<{ allBooks: Book[]; total: number }>;
 
   constructor(
     private readonly homeService: HomeService,
@@ -30,10 +32,13 @@ export class HomeComponent implements OnInit {
   search(formData: NgForm) {
     const { search } = formData.value;
     this.book = this.homeService.search(search);
-    // formData.reset();
   }
 
-  getFilterEvent(event: Observable<Book[]>) {
+  getFilterEvent(event: Observable<{ allBooks: Book[]; total: number }>) {
     this.book = event;
+  }
+
+  getPaginationEvent(event: number) {
+    this.book = this.homeService.homeLoad(event);
   }
 }

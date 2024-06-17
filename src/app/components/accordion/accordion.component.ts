@@ -13,7 +13,7 @@ import { NgForm } from '@angular/forms';
 })
 export class AccordionComponent implements OnInit {
   authors$!: Observable<Authorlist[]>;
-  filterdData$!: Observable<Book[]>;
+  filterdData$!: Observable<{ allBooks: Book[]; total: number }>;
   @Output() filterEvent = new EventEmitter();
 
   constructor(private readonly filterService: FilterService) {}

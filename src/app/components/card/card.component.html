@@ -1,5 +1,5 @@
 <div class="grid grid-cols-4 gap-4 py-4">
-  @for (book of bookData | async; track $index) {
+  @for (book of (bookData | async)?.allBooks; track $index) {
   <!--     
     @if (!book) {
     <app-spinner></app-spinner>

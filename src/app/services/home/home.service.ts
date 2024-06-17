@@ -11,12 +11,16 @@ export class HomeService {
   constructor(private readonly http: HttpClient) {}
 
   //get books on page load
-  homeLoad(pgNo = 0): Observable<Book[]> {
-    return this.http.get<Book[]>(`${constant.baseUrl}book?pgNo=${pgNo}`);
+  homeLoad(pgNo = 0): Observable<{ allBooks: Book[]; total: number }> {
+    return this.http.get<{ allBooks: Book[]; total: number }>(
+      `${constant.baseUrl}book?pgNo=${pgNo}`
+    );
   }
 
   //search book
-  search(word: string): Observable<Book[]> {
-    return this.http.get<Book[]>(`${constant.baseUrl}filter?word=${word}`);
+  search(word: string): Observable<{ allBooks: Book[]; total: number }> {
+    return this.http.get<{ allBooks: Book[]; total: number }>(
+      `${constant.baseUrl}filter?word=${word}`
+    );
   }
 }

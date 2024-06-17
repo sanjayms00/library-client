@@ -1,5 +1,15 @@
 <app-table
-  [listData]="bookList"
+  [listData]="bookList.allBooks"
   [fields]="fields"
   [action]="'Book'"
+  [page]="pageNo"
+  [count]="count"
 ></app-table>
+
+<app-pagination
+  class="p-5"
+  [pageNo]="pageNo"
+  [count]="count"
+  [total]="bookList.total"
+  (paginationEvent)="getPaginationEvent($event)"
+></app-pagination>

@@ -2,4 +2,14 @@
   [listData]="authorList"
   [fields]="fields"
   [action]="'Author'"
+  [page]="pageNo"
+  [count]="count"
 ></app-table>
+
+<app-pagination
+  class="p-5"
+  [pageNo]="pageNo"
+  [count]="count"
+  [total]="total"
+  (paginationEvent)="getPaginationEvent($event)"
+></app-pagination>
