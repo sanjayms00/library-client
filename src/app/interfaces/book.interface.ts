@@ -25,3 +25,13 @@ export interface CreateBook {
   biography: string;
   birthdate: Date;
 }
+
+export interface Author {
+  author: AuthorData[];
+  total: number;
+}
+
+export interface AllBook {
+  allBooks: Book[];
+  total: number;
+}

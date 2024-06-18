@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HomeService } from '../../services/home/home.service';
-import { Book } from '../../interfaces/book.interface';
+import { AllBook, Book } from '../../interfaces/book.interface';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
@@ -14,7 +14,7 @@ export class HomeComponent implements OnInit {
   pageNo = 0;
   count: number = 12;
   total: number = 0;
-  book!: Observable<{ allBooks: Book[]; total: number }>;
+  book!: Observable<AllBook>;
 
   constructor(
     private readonly homeService: HomeService,
@@ -34,7 +34,7 @@ export class HomeComponent implements OnInit {
     this.book = this.homeService.search(search);
   }
 
-  getFilterEvent(event: Observable<{ allBooks: Book[]; total: number }>) {
+  getFilterEvent(event: Observable<AllBook>) {
     this.book = event;
   }
 

@@ -3,7 +3,7 @@ import { initFlowbite } from 'flowbite';
 import { FilterService } from '../../services/filter/filter.service';
 import { Authorlist, Filter } from '../../interfaces/filter.interface';
 import { Observable } from 'rxjs';
-import { Book } from '../../interfaces/book.interface';
+import { AllBook, Book } from '../../interfaces/book.interface';
 import { NgForm } from '@angular/forms';
 
 @Component({
@@ -13,7 +13,7 @@ import { NgForm } from '@angular/forms';
 })
 export class AccordionComponent implements OnInit {
   authors$!: Observable<Authorlist[]>;
-  filterdData$!: Observable<{ allBooks: Book[]; total: number }>;
+  filterdData$!: Observable<AllBook>;
   @Output() filterEvent = new EventEmitter();
 
   constructor(private readonly filterService: FilterService) {}

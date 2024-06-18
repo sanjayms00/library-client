@@ -1,6 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { AuthorData, CreateAuthor } from '../../interfaces/book.interface';
+import {
+  Author,
+  AuthorData,
+  CreateAuthor,
+} from '../../interfaces/book.interface';
 import { constant } from '../../constants/constant';
 import { Observable } from 'rxjs';
 
@@ -10,10 +14,8 @@ import { Observable } from 'rxjs';
 export class AuthorService {
   constructor(private readonly http: HttpClient) {}
 
-  getAuthors(pgNo = 0): Observable<{ author: AuthorData[]; total: number }> {
-    return this.http.get<{ author: AuthorData[]; total: number }>(
-      `${constant.baseUrl}author?pgNo=${pgNo}`
-    );
+  getAuthors(pgNo = 0): Observable<Author> {
+    return this.http.get<Author>(`${constant.baseUrl}author?pgNo=${pgNo}`);
   }
 
   //create author

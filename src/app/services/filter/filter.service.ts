@@ -1,7 +1,7 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Book } from '../../interfaces/book.interface';
+import { AllBook, Book } from '../../interfaces/book.interface';
 import { constant } from '../../constants/constant';
 import { Authorlist, Filter } from '../../interfaces/filter.interface';
 
@@ -17,7 +17,7 @@ export class FilterService {
   }
 
   //filter book
-  filter(filter: Filter): Observable<{ allBooks: Book[]; total: number }> {
+  filter(filter: Filter): Observable<AllBook> {
     let params = new HttpParams();
     // Append each filter property to the params
     Object.entries(filter).forEach(([key, value]) => {
@@ -26,9 +26,6 @@ export class FilterService {
       }
     });
 
-    return this.http.get<{ allBooks: Book[]; total: number }>(
-      `${constant.baseUrl}filter`,
-      { params }
-    );
+    return this.http.get<AllBook>(`${constant.baseUrl}filter`, { params });
   }
 }

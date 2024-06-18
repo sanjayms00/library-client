@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BookListService } from '../../services/bookList/book-list.service';
-import { Book } from '../../interfaces/book.interface';
+import { AllBook, Book } from '../../interfaces/book.interface';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -11,7 +11,7 @@ import { Subscription } from 'rxjs';
 export class BookListComponent implements OnInit {
   pageNo = 0;
   count: number = 12;
-  bookList: { allBooks: Book[]; total: number } = {
+  bookList: AllBook = {
     allBooks: [],
     total: 0,
   };

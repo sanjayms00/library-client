@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output, input } from '@angular/core';
-import { Book } from '../../interfaces/book.interface';
+import { AllBook, Book } from '../../interfaces/book.interface';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
   styleUrl: './card.component.css',
 })
 export class CardComponent {
-  @Input() bookData!: Observable<{ allBooks: Book[]; total: number }>;
+  @Input() bookData!: Observable<AllBook>;
   @Output() cardEvent = new EventEmitter();
 
   detail(id: string) {
