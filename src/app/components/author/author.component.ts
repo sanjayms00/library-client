@@ -11,7 +11,7 @@ import { Subscription } from 'rxjs';
 export class AuthorComponent implements OnInit, OnDestroy {
   pageNo = 0;
   count: number = 12;
-  total!: number;
+  total: number = 0;
   authorList!: AuthorData[];
   fields = ['Name', 'biography', 'birthdate', 'Action'];
   getAuthorsSubscription!: Subscription;

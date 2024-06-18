@@ -63,7 +63,7 @@
         class="p-5"
         [pageNo]="pageNo"
         [count]="count"
-        [total]="(book | async)!.total"
+        [total]="(book | async)?.total ?? total"
         (paginationEvent)="getPaginationEvent($event)"
       ></app-pagination>
     </ng-container>
